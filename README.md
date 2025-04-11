@@ -1,117 +1,118 @@
 # Smart Mobility Hub
 
-Smart Mobility Hub is a web application built with Rails 8 and PostgreSQL that enables users to plan trips and book transportation services. This MVP demonstrates the core functionality of the platform and serves as a foundation for further expansion.
+Smart Mobility Hub is a web application built with **Ruby on Rails 8** and **PostgreSQL**. It allows users to easily plan trips and book transportation services. This Minimum Viable Product (MVP) showcases core functionalities and acts as a foundation for future enhancements.
+
+---
 
 ## Key Features
 
-- **User Authentication**  
-  Users can sign up, log in, log out, and manage their profiles using Devise.
+### User Authentication
+- Users can **sign up**, **log in**, **log out**, and manage their profiles securely with **Devise**.
 
-- **Route Management**  
-  Users can create, view, edit, and delete routes. Each route contains details such as the origin, destination, distance, and estimated travel duration. Routes are automatically linked to the current user.
+### Route Management
+- Create, view, edit, and delete travel routes.
+- Routes include details such as origin, destination, distance, and estimated duration.
+- Automatically linked to the logged-in user.
 
-- **Booking Management**  
-  Users can create bookings for their routes. Bookings are associated automatically with the user who is logged in.
+### Booking Management
+- Users can create bookings for specific routes.
+- Bookings are automatically associated with the current user.
 
-- **Feedback Functionality**  
-  Users can submit and edit feedback (reviews) for the service, providing a rating and comments. Feedback is connected to the user’s account.
+### Feedback Functionality
+- Users can submit and edit reviews providing ratings and comments.
+- Feedback is connected directly to user accounts.
+
+---
 
 ## Installation and Setup
 
-Follow these steps to set up and run the project locally:
+### Prerequisites
+Ensure **Ruby**, **Rails**, and **PostgreSQL** are installed.
 
-1. **Clone the Repository**
+### Clone the Repository
+```bash
+git clone https://github.com/<your-username>/<repo-name>.git
+cd smart_mobility_hub
+```
 
-   ```bash
-   git clone https://github.com/<your-username>/<repo-name>.git
-   cd smart_mobility_hub
-Install Dependencies
-
-Make sure you have Ruby, Rails, and PostgreSQL installed. Then run:
-
-bash
-Copy
+### Install Dependencies
+```bash
 bundle install
-Set Up the Database
+```
 
-Create and migrate the database by running:
-
-bash
-Copy
+### Set Up the Database
+```bash
 bundle exec rails db:create
 bundle exec rails db:migrate
-Start the Server
+```
 
-Launch the Rails server with:
-
-bash
-Copy
+### Start the Server
+```bash
 bundle exec rails server
-Your application will be available at http://localhost:3000.
+```
 
-Key Routes
-Home Page:
-http://localhost:3000/ – The landing page with general information.
+Visit the application at:
+```
+http://localhost:3000
+```
 
-User Authentication:
+---
 
-Sign Up: http://localhost:3000/users/sign_up
+## Application Routes
 
-Sign In: http://localhost:3000/users/sign_in
+- **Home Page**: `http://localhost:3000`
 
-Routes:
+**User Authentication:**
+- Sign Up: `http://localhost:3000/users/sign_up`
+- Sign In: `http://localhost:3000/users/sign_in`
 
-List Routes: http://localhost:3000/routes
+**Routes Management:**
+- List Routes: `http://localhost:3000/routes`
+- New Route: `http://localhost:3000/routes/new`
 
-Create New Route: http://localhost:3000/routes/new
+**Bookings:**
+- List Bookings: `http://localhost:3000/bookings`
+- New Booking: `http://localhost:3000/bookings/new`
 
-Bookings:
+**Feedback:**
+- List Feedbacks: `http://localhost:3000/feedbacks`
+- New Feedback: `http://localhost:3000/feedbacks/new`
 
-List Bookings: http://localhost:3000/bookings
+---
 
-Create Booking: http://localhost:3000/bookings/new
+## Running Tests
 
-Feedbacks:
+Ensure `rspec-rails` is added under the `:development, :test` group in your `Gemfile`:
 
-List Feedbacks: http://localhost:3000/feedbacks
-
-Create Feedback: http://localhost:3000/feedbacks/new
-
-Running Tests
-If you wish to run automated tests (using RSpec), follow these steps:
-
-Install RSpec (if not already installed):
-
-Ensure rspec-rails is present in the Gemfile under the :development, :test group and then run:
-
-bash
-Copy
+```bash
 bundle install
 bundle exec rails generate rspec:install
-Run the tests:
-
-bash
-Copy
 bundle exec rspec
-Deployment (Optional)
-For Heroku Deployment
-Create a Procfile in the project root with the following content:
+```
 
-Procfile
-Copy
+---
+
+## Deployment
+
+### Heroku
+
+Create a `Procfile` in your project root:
+
+```Procfile
 web: bundle exec rails server -p $PORT -e production
-Deploy to Heroku:
+```
 
-bash
-Copy
+Deploy:
+```bash
 heroku create
 git push heroku main
 heroku run rails db:migrate
-For Docker Deployment
-Create a Dockerfile in the project root:
+```
 
-dockerfile
-Copy
+### Docker
+
+Create a `Dockerfile`:
+```Dockerfile
 FROM ruby:3.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /smart_mobility_hub
@@ -120,10 +121,10 @@ COPY Gemfile.lock /smart_mobility_hub/Gemfile.lock
 RUN bundle install
 COPY . /smart_mobility_hub
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
-Create a docker-compose.yml (if needed):
+```
 
-yaml
-Copy
+Create a `docker-compose.yml`:
+```yaml
 version: '3'
 services:
   db:
@@ -132,6 +133,7 @@ services:
       POSTGRES_PASSWORD: your_password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
   web:
     build: .
     command: bundle exec rails server -b 0.0.0.0
@@ -141,13 +143,24 @@ services:
       - "3000:3000"
     depends_on:
       - db
+
 volumes:
   postgres_data:
-Final Notes
-Feedback and Iteration:
-This project is a minimal viable product (MVP) and serves as a foundation for future enhancements. Features such as external API integrations (e.g., mapping services) and advanced background processing can be implemented later.
+```
 
-Contributions:
-Feel free to open issues or contribute improvements. Your feedback is welcome!
+---
 
-Enjoy exploring Smart Mobility Hub!
+## Final Notes
+
+### Feedback and Iteration
+This MVP provides core functionality. Future improvements may include:
+- External API integrations (e.g., mapping services).
+- Advanced background job processing.
+
+### Contributions
+Feel free to contribute by opening issues or suggesting enhancements. Your feedback is highly valued.
+
+---
+
+Enjoy exploring **Smart Mobility Hub**!
+
