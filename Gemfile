@@ -48,7 +48,7 @@ gem "thruster", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 7.1"
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
   gem "brakeman", require: false
   gem "rubocop-rails-omakase", require: false
