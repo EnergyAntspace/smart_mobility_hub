@@ -1,0 +1,38 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: 127.0.0.1
+  port: 5432
+  sslmode: disable
+
+development:
+  <<: *default
+  database: smart_mobility_hub_development
+  username: postgres
+  password: "Space@018postgresql"
+
+test:
+  <<: *default
+  database: smart_mobility_hub_test
+  username: postgres
+  password: "Space@018postgresql"
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: smart_mobility_hub_production
+    username: smart_mobility_hub
+    password: <%= ENV["SMART_MOBILITY_HUB_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: smart_mobility_hub_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: smart_mobility_hub_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: smart_mobility_hub_production_cable
+    migrations_paths: db/cable_migrate
